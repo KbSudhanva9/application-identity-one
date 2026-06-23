@@ -92,14 +92,10 @@ export default function UserList() {
       key: 'role'
     },
     {
-      title: 'Deposit',
-      dataIndex: 'deposit',
-      key: 'deposit'
-    },
-    {
-      title: 'Used Deposit',
-      dataIndex: 'usedDeposit',
-      key: 'usedDeposit'
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
+      render: (phone: string) => phone || 'N/A'
     },
     {
       title: 'Status',
