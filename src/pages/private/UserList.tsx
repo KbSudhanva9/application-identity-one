@@ -37,9 +37,8 @@ export default function UserList() {
     name: '',
     email: '',
     role: '',
-    isActive: null as boolean | null,
-    usedDeposit: null as number | null,
-    deposit: null as number | null
+    phone: '',
+    isActive: null as boolean | null
   });
 
   const loadUsers = async (
@@ -113,7 +112,7 @@ export default function UserList() {
   return (
     <Card title="User Management">
       <Row gutter={16} style={{ marginBottom: 20 }}>
-        <Col span={6}>
+        <Col span={3}>
           <Input
             placeholder="Search Name"
             value={filters.name}
@@ -126,7 +125,7 @@ export default function UserList() {
           />
         </Col>
 
-        <Col span={6}>
+        <Col span={3}>
           <Input
             placeholder="Search Email"
             value={filters.email}
@@ -139,7 +138,7 @@ export default function UserList() {
           />
         </Col>
 
-        <Col span={6}>
+        <Col span={3}>
           <Select
             placeholder="Select Role"
             style={{ width: '100%' }}
@@ -156,6 +155,42 @@ export default function UserList() {
             <Option value="USER">USER</Option>
           </Select>
         </Col>
+
+        <Col span={3}>
+          <Input
+            placeholder="Search Phone"
+            value={filters.phone}
+            onChange={(e) =>
+              setFilters({
+                ...filters,
+                phone: e.target.value
+              })
+            }
+          />
+        </Col>
+
+      <Col span={3}>
+        <Select
+          placeholder="Select Status"
+          allowClear
+          style={{ width: '100%' }}
+          value={filters.isActive?.toString()}
+          onChange={(value) =>
+            setFilters({
+              ...filters,
+              isActive:
+                value === 'true'
+                  ? true
+                  : value === 'false'
+                  ? false
+                  : null
+            })
+          }
+        >
+          <Option value="true">ACTIVE</Option>
+          <Option value="false">INACTIVE</Option>
+        </Select>
+      </Col>
 
         <Col span={6}>
           <Space>
@@ -175,9 +210,8 @@ export default function UserList() {
                   name: '',
                   email: '',
                   role: '',
-                  isActive: null,
-                  usedDeposit: null,
-                  deposit: null
+                  phone: '',
+                  isActive: null
                 };
 
                 setFilters(reset);
