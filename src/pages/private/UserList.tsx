@@ -65,6 +65,25 @@ export default function UserList() {
     }
   };
 
+  const updateStatus = async (id: string, isActive: boolean) => {
+    try {
+      await api.patch(`/auth/${id}/status`, {
+        isActive: !isActive
+      });
+
+      message.success(
+        !isActive
+          ? "User activated successfully"
+          : "User deactivated successfully"
+      );
+
+      loadUsers(); // refresh table
+    } catch (error) {
+      console.error(error);
+      message.error("Failed to update status");
+    }
+  };
+
   useEffect(() => {
     loadUsers();
   }, []);
@@ -96,18 +115,34 @@ export default function UserList() {
       key: 'phone',
       render: (phone: string) => phone || 'N/A'
     },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'isActive',
+    //   key: 'isActive',
+    //   render: (active: boolean) =>
+    //     active ? (
+    //       <Tag color="green">ACTIVE</Tag>
+    //     ) : (
+    //       <Tag color="red">INACTIVE</Tag>
+    //     )
+    // }
     {
-      title: 'Status',
-      dataIndex: 'isActive',
-      key: 'isActive',
-      render: (active: boolean) =>
-        active ? (
-          <Tag color="green">ACTIVE</Tag>
-        ) : (
-          <Tag color="red">INACTIVE</Tag>
-        )
-    }
-  ];
+    title: "Status",
+    dataIndex: "isActive",
+    key: "isActive",
+    render: (_: boolean, record: any) => (
+      <Button
+        danger={record.isActive}
+        type="primary"
+        onClick={() =>
+          updateStatus(record.userId, record.isActive)
+        }
+      >
+        {record.isActive ? "Deactivate" : "Activate"}
+      </Button>
+    )
+  }
+];
 
   return (
     <Card title="User Management">

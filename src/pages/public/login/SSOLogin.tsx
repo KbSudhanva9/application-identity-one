@@ -72,7 +72,7 @@ export default function SSOLogin() {
 
             // window.location.href = profileResult.data.redirectUrl + `?token=${encodeURIComponent(data.accessToken)}`;
 
-            window.location.href = "/home";
+            window.location.href = "/home/profile";
 
             //  return <Navigate to='/home' />;
 
@@ -92,6 +92,7 @@ export default function SSOLogin() {
 
       } catch (error) {
         console.error("Exchange Failed", error);
+        window.location.href = "http://localhost:5173/"; // Redirect to login on failure
       }
     };
 
