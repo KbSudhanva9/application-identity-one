@@ -39,14 +39,16 @@ export default function SSOLogin() {
 
         // console.log("Exchange Response:", response.data);
 
-        const data = response.data.data;
+        const data = response.data.jwt;
+
+        // console.log("Exchange Data:", data);
 
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
 
         message.success("Session exchange successful!");
 
-        console.log("Access Token:", data);
+        // console.log("Access Token:", data);
 
       //   console.log("Login Success");
 
